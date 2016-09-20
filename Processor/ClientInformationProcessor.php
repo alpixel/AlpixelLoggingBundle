@@ -50,12 +50,8 @@ class ClientInformationProcessor
                 $user = $token->getUser();
 
                 $userName = (string)$user;
-                try {
-                    if ($user->getId() !== null) {
-                        $userName = $userName.sprintf(" (ID: %s)", $user->getId());
-                    }
-                } catch (\Exception $e) {
-
+                if (is_object($user) && method_exists($user, "getId") && $user->getId() !== null) {
+                    $userName = $userName.sprintf(" (ID: %s)", $user->getId());
                 }
             }
         }
