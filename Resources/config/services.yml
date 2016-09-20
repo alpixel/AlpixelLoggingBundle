@@ -1,0 +1,23 @@
+services:
+    alpixel_logging.formatter.slack:
+        class: Alpixel\Bundle\LoggingBundle\Formatter\SlackFormatter
+        arguments:
+          - "%%message%%"
+
+    alpixel_logging.handler.slack:
+        class: Alpixel\Bundle\LoggingBundle\Handler\SlackHandler
+        arguments:
+          - "%alpixel_logging.token%"
+          - "%alpixel_logging.channel%"
+          - "%alpixel_logging.bot_name%"
+          - "pls"
+
+
+    alpixel_logging.processor.client_information:
+        class: Alpixel\Bundle\LoggingBundle\Processor\ClientInformationProcessor
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+        arguments:
+            - "@request_stack"
+        tags:
+            - { name: monolog.processor }

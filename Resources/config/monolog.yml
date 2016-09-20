@@ -1,0 +1,49 @@
+common:
+    chat:
+        type:   service
+        id:     alpixel_logging.handler.slack
+        level:  critical
+
+no_debug:
+    main:
+        type:               fingers_crossed
+        action_level:       error
+        handler:            grouped
+    grouped:
+        type:               group
+        members:            [streamed]
+        members:            [streamed]
+    streamed:
+        type:               rotating_file
+        max_files:          10
+        path:               "%kernel.logs_dir%/%kernel.environment%.log"
+        level:              debug
+    login:
+        type:               rotating_file
+        max_files:          10
+        path:               "%kernel.logs_dir%/auth.log"
+        level:              info
+        channels:           security
+
+
+debug:
+    main:
+        type:   stream
+        path:   "%kernel.logs_dir%/%kernel.environment%.log"
+        level:  debug
+        channels: ["!event"]
+    console:
+        type:   console
+        bubble: false
+        verbosity_levels:
+            VERBOSITY_VERBOSE: INFO
+            VERBOSITY_VERY_VERBOSE: DEBUG
+        channels: ["!doctrine"]
+    console_very_verbose:
+        type:   console
+        bubble: false
+        verbosity_levels:
+            VERBOSITY_VERBOSE: NOTICE
+            VERBOSITY_VERY_VERBOSE: NOTICE
+            VERBOSITY_DEBUG: DEBUG
+        channels: ["doctrine"]
