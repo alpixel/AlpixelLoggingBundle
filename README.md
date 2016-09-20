@@ -24,3 +24,5 @@ alpixel_logging:
       channel:  "alerts"
       debug: false #To activate in debug environment
 ```
+
+Don't forget to remove any basic logging configuration in your config_prod and config_dev.yml
