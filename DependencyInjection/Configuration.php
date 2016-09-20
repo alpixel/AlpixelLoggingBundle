@@ -33,7 +33,7 @@ class Configuration implements ConfigurationInterface
             ->cannotBeEmpty()
             ->end()
             ->scalarNode('channel')
-            ->defaultValue('alerts')
+            ->defaultValue('error-log')
             ->cannotBeEmpty()
             ->end()
             ->booleanNode('debug')
