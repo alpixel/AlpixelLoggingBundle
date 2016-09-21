@@ -5,25 +5,20 @@ common:
         level:  critical
 
 no_debug:
-    main:
-        type:               fingers_crossed
-        action_level:       error
-        handler:            grouped
-    grouped:
-        type:               group
-        members:            [streamed]
-        members:            [streamed]
-    streamed:
+    file_log:
         type:               rotating_file
         max_files:          10
-        path:               "%kernel.logs_dir%/%kernel.environment%.log"
-        level:              debug
+        path:               "%kernel.logs_dir%/%kernel.environment%_errors.log"
+        level:              error
+    syslog_handler:
+        type:               syslog
+        level:              error
     login:
         type:               rotating_file
         max_files:          10
         path:               "%kernel.logs_dir%/auth.log"
         level:              info
-        channels:           security
+        channels:           ["security"]
 
 
 debug:
