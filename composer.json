@@ -19,7 +19,7 @@
   ],
   "require": {
     "php": ">=5.5.0",
-    "symfony/symfony": "~2.8",
+    "symfony/symfony": "~2.8||~3.0",
     "monolog/monolog": "~1.21"
   },
   "autoload": {
